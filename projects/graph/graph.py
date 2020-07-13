@@ -123,7 +123,24 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        # start a queue that is a list of paths.
+        paths = Queue()
+        paths.enqueue([starting_vertex])
+
+        while paths.size() > 0:
+            # dequeue the path so we can add nodes to the path
+            path = paths.dequeue()
+            # current path is the last node in the path
+            current_vertex = path[-1]
+
+            if current_vertex == destination_vertex:
+                return path
+            
+            # otherwise initialize new paths for each neighbor
+            else:
+                for i in self.get_neighbors(current_vertex):
+                    new_path = path + [i]
+                    paths.enqueue(new_path)
 
     def dfs(self, starting_vertex, destination_vertex):
         """
