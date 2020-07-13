@@ -31,7 +31,8 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        return self.vertices[vertex_id]
+        if self.vertices[vertex_id]:
+            return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
@@ -57,7 +58,7 @@ class Graph:
 
                 # print out the vertex
                 print(current)
-                
+
                 # add vertex to visited if not already in there.
                 vertex_visited.add(current)
 
@@ -73,16 +74,48 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # use a stack for depth traversion
+        vertex_stack = Stack()
+        vertex_stack.push(starting_vertex)
 
-    def dft_recursive(self, starting_vertex):
+        vertex_visited = set()
+
+        while vertex_stack.size() > 0:
+            
+            current = vertex_stack.pop()
+
+            if current not in vertex_visited:
+                print(current)
+                vertex_visited.add(current)
+
+                for i in self.get_neighbors(current):
+                    vertex_stack.push(i)
+        
+        return vertex_visited
+
+
+
+    def dft_recursive(self, starting_vertex, vertex_visited=set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # added a parameter vertex_visited and set to an empty set()
+
+        # if the starting vertex is not in the vertex_visited set then print and add 
+        # that vertex to the set
+        if starting_vertex not in vertex_visited:
+            print(starting_vertex)
+            vertex_visited.add(starting_vertex)
+
+            # for each neighbor of the starting vertex run the dft_recursive method. 
+            for i in self.get_neighbors(starting_vertex):
+                self.dft_recursive(i, vertex_visited)
+
+        
+
 
     def bfs(self, starting_vertex, destination_vertex):
         """
