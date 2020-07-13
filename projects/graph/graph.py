@@ -13,26 +13,60 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        if vertex_id in self.vertices:
+            pass
+        else:
+            self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            print('Only one vertice in graph')
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # need a queue for where we are visiting and a set to place those that we have
+        # already visited 
+        
+        vertex_queue = Queue()
+        vertex_queue.enqueue(starting_vertex)
+
+        vertex_visited = set()
+
+        # while our vertex queue is greater than one we will continue to traverse our nodes
+        while vertex_queue.size() > 0:
+
+            # dequeue our starting vertex to a variable
+            current = vertex_queue.dequeue()
+
+            # check if the current vertex is in our visited
+            if current not in vertex_visited:
+
+                # print out the vertex
+                print(current)
+                
+                # add vertex to visited if not already in there.
+                vertex_visited.add(current)
+
+                # check all the existing neighbors for the current vertex, and add them to the queue
+                for i in self.get_neighbors(current):
+                    vertex_queue.enqueue(i)
+            
+        # once there are no vertices in our queue we will return our list of visited vertices
+        return vertex_visited
 
     def dft(self, starting_vertex):
         """
