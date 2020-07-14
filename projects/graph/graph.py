@@ -148,7 +148,26 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        paths = Stack()
+        paths.push([starting_vertex])
+
+        vertex_visited = set()
+
+        while paths.size() > 0:
+            path = paths.pop()
+
+            current_vertex = path[-1]
+
+            if current_vertex not in vertex_visited:
+                if current_vertex == destination_vertex:
+                    return path
+
+                else:
+                    for i in self.vertices[current_vertex]:
+                        paths.push(path + [i])
+            
+            vertex_visited.add(current_vertex)
+
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
