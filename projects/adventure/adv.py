@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from world import World
+from traversal import get_traversal
 
 import random
 from ast import literal_eval
@@ -14,7 +15,7 @@ world = World()
 # map_file = "maps/test_cross.txt"
 # map_file = "maps/test_loop.txt"
 # map_file = "maps/test_loop_fork.txt"
-map_file = "maps/main_maze.txt"
+map_file = "projects/adventure/maps/main_maze.txt"
 
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
@@ -27,7 +28,7 @@ player = Player(world.starting_room)
 
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
-traversal_path = []
+traversal_path = get_traversal(room_graph, player)
 
 
 
