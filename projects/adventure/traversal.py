@@ -30,6 +30,7 @@ def get_traversal(room_graph, player):
     # need a place to keep all our visited rooms. Need to visit all rooms before we 
     # are finished traversing
     explored = set()
+    # explored.add(player.current_room.id)
 
     while len(explored) < len(room_graph):
 
@@ -48,6 +49,12 @@ def get_traversal(room_graph, player):
             # we should go. 
             # # room_queue.append(player.current_room.get_exits())
             room_queue[current_room] = player.current_room.get_exits()
+
+            # This isnt working like anticipated.
+            # # remove the previous direction to maybe reduce some additional double backing
+            # # what ever the previous direction was we will remove that from the room_queues directions
+            # prev_dir = previous_directions.pop()
+            # room_queue[current_room].remove(prev_dir)
 
         # if the length of the set of directions of the room_queue is 0. that means there
         # are no exits and we need to back track.
